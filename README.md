@@ -1,4 +1,4 @@
-# Project Overview - Travel App BACKEND 
+# Project Overview - Quiz App BACKEND 
 
 ## Project Schedule
 
@@ -18,7 +18,7 @@
 
 ## Project Description
 
-This project will be a quiz web application, where a user is able to login and take a multiple choice quiz. 
+This project will be a quiz web application, where a user is able to login and take a multiple choice quiz or input the answers for quiz. 
 As of Sunday 9/13, the application will have 4 models. Authentication, Quiz, Question, and, Answer Models. 
 
 ## Time/Priority Matrix 
