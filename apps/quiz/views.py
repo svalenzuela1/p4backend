@@ -42,6 +42,58 @@ class QuizViewSet(viewsets.ModelViewSet):
         })
 
 
+class QuizQuestions(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = QuestionSerializer
+
+    def queryset(self):
+        if self.kwargs.get("quiz_pk"):
+            quiz = Quiz.objects.get(pk=self.kwargs["quiz_pk"])
+            queryset = Question.objects.filter(
+                owner= self.request.user,
+                quiz=quiz
+            )
+            return queryset
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class SingleQuizQuestion(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated,)
+
+    def get_queryset(self):
+        if self.kwarg.get("quiz_pk") and self.kwargs.get("pk"):
+            quiz = Quiz.objects.get(pk=self.kwargs["quiz_pk"])
+            queryset = Question.objects.filter(
+                pk=self.kwargs["pk"],
+                owner=self.request.user,
+                quiz=quiz)
+            return queryset
+
+class QuestionViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = QuestionSerializer
+
+    def get_queryset(self):
+        queryset = Question.objects.all().filter(owner=self.request.user)
+        return queryset
+
+    def create(self, request, *args, **kwargs):
+        if request.user.is_anonymous:
+            raise PermissionDenied(
+                "Only logged in users with accounts can create quizzes"
+            )
+
+        return super().create(request, *args, **kwargs)
+
+    def destroy(self, request, *args, **kwargs):
+        question = Question.objects.get(pk=self.kwargs["pk"])
+        if not request.user == question.owner:
+            raise PermissionDenied(
+                "You have no permissions to edit this question"
+            )
+        return super().update(request, *args, **kwargs)
 
 
 
