@@ -11,7 +11,12 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 class QuizSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
-    questions = QuestionSerializer(many=True, read_only=True, required=False)
+
+    #this currently has a problem on the server
+    question = QuestionSerializer(many=True, read_only=True, required=False)
+    #AssertionError 'The field 'question' was declared on serializer QuizSerializer, but has not been included in the 'fields' option.'
+
+
 
     class Meta:
         model = Quiz

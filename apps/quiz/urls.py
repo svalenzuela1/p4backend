@@ -4,12 +4,12 @@ from apps.quiz.views import QuizViewSet, QuizQuestions, SingleQuizQuestion, Ques
 from django.conf.urls import url
 
 router = routers.DefaultRouter()
-router.register('quizzes', QuizViewSet, basename='quizzes')
+router.register('quiz', QuizViewSet, basename='quiz')
 router.register('questions', QuestionViewSet, basename='questions')
 
 custom_urlpatterns = [
-    url(r'quizzes/(?P<quiz_pk>\d+)/questions$', QuizQuestions.as_view(), name='quiz_questions'),
-    url(r'quizzes/(?P<quiz_pk>\d+)/questions/(?P<pk>\d+)$', SingleQuizQuestion.as_view(), name='single_quiz_question'),
+    url(r'quiz/(?P<quiz_pk>\d+)/questions$', QuizQuestions.as_view(), name='quiz_questions'),
+    url(r'quiz/(?P<quiz_pk>\d+)/questions/(?P<pk>\d+)$', SingleQuizQuestion.as_view(), name='single_quiz_question'),
 ]
 
 urlpatterns = router.urls
