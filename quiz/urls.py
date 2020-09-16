@@ -1,6 +1,5 @@
-from django.urls import path, include
 from rest_framework import routers
-from apps.quiz.views import QuizViewSet, QuizQuestions, SingleQuizQuestion, QuestionViewSet
+from quiz.views import QuizViewSet, QuizQuestions, SingleQuizQuestion, QuestionViewSet
 from django.conf.urls import url
 
 router = routers.DefaultRouter()

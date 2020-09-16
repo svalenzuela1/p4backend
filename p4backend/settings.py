@@ -11,7 +11,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-#import django_heroku
+import django_heroku
 import datetime
 from pathlib import Path
 
@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'apps.authentication',
-    'apps.quiz',
+    'authentication',
+    'quiz',
 ]
 
 MIDDLEWARE = [
@@ -146,5 +146,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-#django_heroku.settings(locals())
+django_heroku.settings(locals())
 
