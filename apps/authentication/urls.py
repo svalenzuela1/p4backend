@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from authentication.views import RegistrationAPIView, LoginAPIView
+from apps.authentication.views import RegistrationAPIView, LoginAPIView
 
 urlpatterns = [
     url(r'^users/register/$', RegistrationAPIView.as_view(), name='register'),

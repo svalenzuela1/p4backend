@@ -4,8 +4,8 @@ from rest_framework.exceptions import(
     ValidationError, PermissionDenied
 )
 from rest_framework.permissions import IsAuthenticated
-from quiz.models import Quiz, Question
-from quiz.serializers import QuizSerializer, QuestionSerializer
+from apps.quiz.models import Quiz, Question
+from apps.quiz.serializers import QuizSerializer, QuestionSerializer
 
 
 # Create your views here.
@@ -32,13 +32,13 @@ class QuizViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
     def destroy(self, request, *args, **kwargs):
+        print("calling destroy method")
         quiz = Quiz.objects.get(pk=self.kwargs["pk"])
         if not request.user == quiz.owner:
             raise PermissionDenied("You cannot delete this quiz")
 
-        return Response({
-            super().destroy(request, *args, **kwargs)
-        })
+        return super().destroy(request, *args, **kwargs)
+
 
 
 class QuizQuestions(generics.ListCreateAPIView):

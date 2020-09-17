@@ -1,5 +1,5 @@
 from django.db import models
-from authentication.models import User
+from apps.authentication.models import User
 #from django.core.validators import MaxValueValidator, MinValueValidator
 
 
@@ -27,16 +27,3 @@ class Question(models.Model):
 
     def __str__(self):
         return self.answer
-
-
-# class Answer(models.Model):
-#     class Meta:
-#         verbose_name_plural = 'answers'
-#
-#     question = models.ForeignKey(Question, related_name='answers', on_delete=models.CASCADE)
-#     answer = models.CharField(max_length=100)
-#     is_correct = models.BooleanField(default=False)
-#
-#
-#     def __str__(self):
-#         return self.answer
