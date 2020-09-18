@@ -22,8 +22,11 @@ class Question(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     question = models.CharField(max_length=100)
     order = models.IntegerField(default=0)
-    choice = models.IntegerField(default=4)
-    answer = models.CharField(max_length=100)
+    choice_one = models.CharField(max_length=250, null=True)
+    choice_two= models.CharField(max_length=250, null=True)
+    choice_three = models.CharField(max_length=250, null=True)
+    choice_four = models.CharField(max_length=250, null=True)
 
     def __str__(self):
-        return self.answer
+        return self.question
+

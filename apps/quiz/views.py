@@ -75,16 +75,23 @@ class QuestionViewSet(viewsets.ModelViewSet):
     serializer_class = QuestionSerializer
 
     def get_queryset(self):
+        print("calling get_queryset")
         queryset = Question.objects.all().filter(owner=self.request.user)
         return queryset
 
     def create(self, request, *args, **kwargs):
+        print("calling create function")
         if request.user.is_anonymous:
             raise PermissionDenied(
-                "Only logged in users with accounts can create quizzes"
+                "Only logged in users with accounts can create questions"
             )
 
         return super().create(request, *args, **kwargs)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
 
     def destroy(self, request, *args, **kwargs):
         question = Question.objects.get(pk=self.kwargs["pk"])

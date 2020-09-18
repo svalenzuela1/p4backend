@@ -6,7 +6,7 @@ class QuestionSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model = Question
-        fields = ('id', 'quiz', 'owner', 'question', 'order', 'choice', 'answer')
+        fields = ('id', 'quiz', 'owner', 'question', 'order', 'choice_one', 'choice_two', 'choice_three', 'choice_four')
 
 
 class QuizSerializer(serializers.ModelSerializer):
