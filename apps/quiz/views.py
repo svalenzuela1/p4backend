@@ -99,7 +99,8 @@ class QuestionViewSet(viewsets.ModelViewSet):
             raise PermissionDenied(
                 "You have no permissions to edit this question"
             )
-        return super().update(request, *args, **kwargs)
+        return super().destroy(request, *args, **kwargs)
+
 
 
 
